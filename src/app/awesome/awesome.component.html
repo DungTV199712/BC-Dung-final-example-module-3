@@ -1,0 +1,62 @@
+<h1>Awesome List</h1>
+<!--<div (keydown.enter)="addAwesome()">-->
+<!--<input type="text" [formControl]="inputControl"  placeholder="url">-->
+<!--<input type="text" [formControl]="inputControl" placeholder="description">-->
+<!--</div>-->
+<!--<ul>-->
+<!--<li *ngFor="let awesome of awesomeList; index as i">-->
+<!--<div (click)="toggleAwesome(i)">-->
+<!--Id: {{awesome.id}}-->
+<!--<br>-->
+<!--URL: {{awesome.url}}-->
+<!--<br>-->
+<!--Description: {{awesome.descriptions}}-->
+<!--</div>-->
+<!--<button (click)="deleteAwesome(i)">remove</button>-->
+<!--</li>-->
+<!--</ul>-->
+
+<form [formGroup]="awesomeForm" (ngSubmit)="onSubmit">
+    <div>
+        <label>
+            url
+            <br>
+            <input type="text" [formControlName]="url">
+        </label>
+    </div>
+    <!--<div *ngIf="awesomeForm.get('url').invalid && awesomeForm.get('url').touched" style="color: red">-->
+    <!--url is required-->
+    <!--</div>-->
+    <div>
+        <label>
+            description
+            <br>
+            <textarea [formControlName]="description" cols="30" rows="10"></textarea>
+        </label>
+    </div>
+    <!--<div *ngIf="awesomeForm.get('body').invalid && awesomeForm.get('body').touched" style="color: red">-->
+    <!--description is required and min length is 10-->
+    <!--</div>-->
+    <button type="submit">Submit</button>
+</form>
+
+<ul>
+    <li *ngFor="let awesome of awesomeList; index as i">
+        <h3>
+            <a [routerLink]="['/awesome', awesome.id]">
+                Id: {{awesome.id}} - {{awesome.url}}
+            </a>
+        </h3>
+        <br>
+        <div>
+            <label>
+                <h4>description:</h4>
+                {{awesome.descriptions}}
+            </label>
+        </div>
+
+        <a [routerLink]="['/awesome', awesome.id, 'edit']">Edit</a>
+
+        <button (click)="deleteAwesome(i)">Delete</button>
+    </li>
+</ul>
